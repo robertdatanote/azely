@@ -7,9 +7,9 @@ interface AzelyLogoProps {
 }
 
 const sizes = {
-  sm: { icon: 24, text: 18, gap: 8 },
-  md: { icon: 32, text: 24, gap: 10 },
-  lg: { icon: 44, text: 34, gap: 14 },
+  sm: { icon: 30, text: 22, gap: 10 },
+  md: { icon: 38, text: 28, gap: 12 },
+  lg: { icon: 48, text: 36, gap: 14 },
   xl: { icon: 64, text: 48, gap: 18 },
 };
 

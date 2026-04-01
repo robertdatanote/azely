@@ -251,10 +251,9 @@ function FeaturedCard({ property }: { property: Property }) {
           style={{
             position: "absolute",
             inset: 0,
-            backgroundImage: property.images[0] ? `url(${property.images[0]})` : undefined,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            background: property.images[0] ? undefined : "linear-gradient(135deg, var(--espresso-mid) 0%, var(--espresso-light) 100%)",
+            background: property.images[0]
+              ? `url(${property.images[0]}) center/cover no-repeat`
+              : "linear-gradient(135deg, var(--espresso-mid) 0%, var(--espresso-light) 100%)",
             transition: "transform 0.6s cubic-bezier(0.16,1,0.3,1)",
           }}
           className="featured-img"
@@ -383,10 +382,9 @@ function PropertyCard({ property }: { property: Property }) {
           style={{
             position: "absolute",
             inset: 0,
-            backgroundImage: property.images[0] ? `url(${property.images[0]})` : undefined,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            background: property.images[0] ? undefined : "linear-gradient(135deg, #1a1510 0%, #2a2018 100%)",
+            background: property.images[0]
+              ? `url(${property.images[0]}) center/cover no-repeat`
+              : "linear-gradient(135deg, #1a1510 0%, #2a2018 100%)",
             transition: "transform 0.5s cubic-bezier(0.16,1,0.3,1)",
           }}
           className="card-img"

@@ -36,10 +36,9 @@ export function PropertyDetailPage({ propertyId }: { propertyId: string }) {
               style={{
                 position: "absolute",
                 inset: 0,
-                backgroundImage: property.images[0] ? `url(${property.images[0]})` : undefined,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-                background: property.images[0] ? undefined : "linear-gradient(135deg, #1a1510 0%, #2a2018 100%)",
+                background: property.images[0]
+                  ? `url(${property.images[0]}) center/cover no-repeat`
+                  : "linear-gradient(135deg, #1a1510 0%, #2a2018 100%)",
               }}
             />
             <div style={{ position: "absolute", inset: 0, background: "linear-gradient(90deg, transparent 50%, rgba(28,22,16,0.6) 100%)" }} />

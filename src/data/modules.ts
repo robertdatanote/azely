@@ -1,9 +1,15 @@
+export type Complexity = "low" | "medium" | "high";
+
 export interface Module {
   name: string;
   description: string;
   tags: string[];
   dependencies?: string[];
   status: "live" | "beta" | "coming";
+  hours: number;
+  complexity: Complexity;
+  implementationFee: number;
+  monthlyFee: number;
 }
 
 export interface Layer {
@@ -14,6 +20,7 @@ export interface Layer {
   modules: Module[];
 }
 
+// Rate: €95/hr implementation, monthly = complexity-based recurring
 export const layers: Layer[] = [
   {
     id: "L0",
@@ -26,36 +33,42 @@ export const layers: Layer[] = [
         description: "Authentication, role-based access (client/team/admin/investor), row-level security. The identity layer everything else connects to.",
         tags: ["security", "multi-tenant"],
         status: "live",
+        hours: 40, complexity: "high", implementationFee: 3800, monthlyFee: 195,
       },
       {
         name: "White-Label Engine",
         description: "CSS variable theming — swap brand colors, fonts, logo and the entire platform adapts. No code changes for a visual rebrand.",
         tags: ["theming", "branding"],
         status: "live",
+        hours: 24, complexity: "medium", implementationFee: 2280, monthlyFee: 125,
       },
       {
         name: "Multi-Language (i18n)",
         description: "400+ translated strings (EN/NL/ES). Cookie-based language switching, server + client support. Add DE/FR/PT by uploading a JSON file.",
         tags: ["NL/EN/ES", "extensible"],
         status: "live",
+        hours: 20, complexity: "medium", implementationFee: 1900, monthlyFee: 95,
       },
       {
         name: "Client Dashboard",
         description: "The home screen every client sees. Journey stepper, property card, KPI summary. The shell where all other modules render.",
         tags: ["responsive", "entry point"],
         status: "live",
+        hours: 36, complexity: "high", implementationFee: 3420, monthlyFee: 175,
       },
       {
         name: "Document Vault",
         description: "Upload, categorize, track status. The central document store that deal tracking, compliance, and e-signatures depend on.",
         tags: ["storage", "categories"],
         status: "live",
+        hours: 28, complexity: "medium", implementationFee: 2660, monthlyFee: 145,
       },
       {
         name: "Notification System",
         description: "Type-specific alerts with urgency levels. The messaging backbone that pushes agent reminders, deal updates, and compliance alerts.",
         tags: ["push-ready", "real-time"],
         status: "live",
+        hours: 20, complexity: "medium", implementationFee: 1900, monthlyFee: 115,
       },
     ],
   },
@@ -71,6 +84,7 @@ export const layers: Layer[] = [
         tags: ["intake", "workflow"],
         dependencies: ["Client Dashboard"],
         status: "live",
+        hours: 28, complexity: "medium", implementationFee: 2660, monthlyFee: 145,
       },
       {
         name: "Deal & Acquisition Tracker",
@@ -78,6 +92,7 @@ export const layers: Layer[] = [
         tags: ["timeline", "milestones"],
         dependencies: ["Client Dashboard"],
         status: "live",
+        hours: 40, complexity: "high", implementationFee: 3800, monthlyFee: 195,
       },
       {
         name: "NIE & Administrative Flow",
@@ -85,6 +100,7 @@ export const layers: Layer[] = [
         tags: ["compliance", "Spain-specific"],
         dependencies: ["Deal & Acquisition Tracker"],
         status: "live",
+        hours: 24, complexity: "medium", implementationFee: 2280, monthlyFee: 125,
       },
       {
         name: "Financial Calculator Suite",
@@ -92,6 +108,7 @@ export const layers: Layer[] = [
         tags: ["calculator", "multi-tab"],
         dependencies: ["Client Dashboard"],
         status: "live",
+        hours: 32, complexity: "high", implementationFee: 3040, monthlyFee: 155,
       },
       {
         name: "Mortgage Comparison",
@@ -99,6 +116,7 @@ export const layers: Layer[] = [
         tags: ["comparison", "NL-ES"],
         dependencies: ["Financial Calculator Suite"],
         status: "live",
+        hours: 24, complexity: "medium", implementationFee: 2280, monthlyFee: 125,
       },
       {
         name: "E-Signature Flow",
@@ -106,6 +124,7 @@ export const layers: Layer[] = [
         tags: ["signing", "audit trail"],
         dependencies: ["Document Vault"],
         status: "live",
+        hours: 20, complexity: "medium", implementationFee: 1900, monthlyFee: 115,
       },
       {
         name: "Messaging & Activity Feed",
@@ -113,6 +132,7 @@ export const layers: Layer[] = [
         tags: ["chat", "activity log"],
         dependencies: ["Client Dashboard"],
         status: "live",
+        hours: 36, complexity: "high", implementationFee: 3420, monthlyFee: 175,
       },
     ],
   },
@@ -128,6 +148,7 @@ export const layers: Layer[] = [
         tags: ["phases", "budget tracking"],
         dependencies: ["Client Dashboard"],
         status: "live",
+        hours: 36, complexity: "high", implementationFee: 3420, monthlyFee: 175,
       },
       {
         name: "Contractor Marketplace",
@@ -135,6 +156,7 @@ export const layers: Layer[] = [
         tags: ["marketplace", "ratings"],
         dependencies: ["Renovation Management"],
         status: "live",
+        hours: 24, complexity: "medium", implementationFee: 2280, monthlyFee: 125,
       },
       {
         name: "Rental Revenue Dashboard",
@@ -142,6 +164,7 @@ export const layers: Layer[] = [
         tags: ["analytics", "SVG charts"],
         dependencies: ["Client Dashboard"],
         status: "live",
+        hours: 36, complexity: "high", implementationFee: 3420, monthlyFee: 175,
       },
       {
         name: "Rental Management Suite",
@@ -149,6 +172,7 @@ export const layers: Layer[] = [
         tags: ["bookings", "multi-platform"],
         dependencies: ["Rental Revenue Dashboard"],
         status: "live",
+        hours: 32, complexity: "medium", implementationFee: 3040, monthlyFee: 165,
       },
       {
         name: "Tourist Licence Tracker",
@@ -156,6 +180,7 @@ export const layers: Layer[] = [
         tags: ["Valencia-specific", "real-time"],
         dependencies: ["Rental Revenue Dashboard"],
         status: "live",
+        hours: 20, complexity: "medium", implementationFee: 1900, monthlyFee: 95,
       },
       {
         name: "Dynamic Pricing Engine",
@@ -163,6 +188,7 @@ export const layers: Layer[] = [
         tags: ["pricing", "seasonal"],
         dependencies: ["Rental Revenue Dashboard"],
         status: "live",
+        hours: 32, complexity: "high", implementationFee: 3040, monthlyFee: 165,
       },
       {
         name: "Utilities Setup Tracker",
@@ -170,6 +196,7 @@ export const layers: Layer[] = [
         tags: ["providers", "status tracking"],
         dependencies: ["Client Dashboard"],
         status: "live",
+        hours: 12, complexity: "low", implementationFee: 1140, monthlyFee: 65,
       },
       {
         name: "Comunidad Management",
@@ -177,6 +204,7 @@ export const layers: Layer[] = [
         tags: ["HOA", "fees"],
         dependencies: ["Client Dashboard"],
         status: "live",
+        hours: 12, complexity: "low", implementationFee: 1140, monthlyFee: 65,
       },
     ],
   },
@@ -191,6 +219,7 @@ export const layers: Layer[] = [
         description: "Per-municipality risk profiles, moratorium tracking, co-owner rules, NRUA monitoring. No competitor offers this.",
         tags: ["risk profiles", "automated"],
         status: "live",
+        hours: 40, complexity: "high", implementationFee: 3800, monthlyFee: 215,
       },
       {
         name: "Cross-Border Tax Dashboard",
@@ -198,6 +227,7 @@ export const layers: Layer[] = [
         tags: ["multi-jurisdiction", "NL-ES"],
         dependencies: ["Financial Calculator Suite"],
         status: "live",
+        hours: 44, complexity: "high", implementationFee: 4180, monthlyFee: 225,
       },
       {
         name: "Cost of Ownership Calculator",
@@ -205,6 +235,7 @@ export const layers: Layer[] = [
         tags: ["P&L", "scenario modeling"],
         dependencies: ["Cross-Border Tax Dashboard", "Rental Revenue Dashboard"],
         status: "live",
+        hours: 28, complexity: "high", implementationFee: 2660, monthlyFee: 155,
       },
       {
         name: "Compliance Calendar",
@@ -212,6 +243,7 @@ export const layers: Layer[] = [
         tags: ["automated", "reminders"],
         dependencies: ["Regulatory Compliance Engine", "Cross-Border Tax Dashboard"],
         status: "live",
+        hours: 20, complexity: "medium", implementationFee: 1900, monthlyFee: 115,
       },
       {
         name: "Content & Market Intelligence",
@@ -219,6 +251,7 @@ export const layers: Layer[] = [
         tags: ["content", "market data"],
         dependencies: ["Client Dashboard"],
         status: "live",
+        hours: 24, complexity: "medium", implementationFee: 2280, monthlyFee: 135,
       },
     ],
   },
@@ -234,6 +267,7 @@ export const layers: Layer[] = [
         tags: ["analytics", "real-time"],
         dependencies: ["Client Dashboard"],
         status: "live",
+        hours: 36, complexity: "high", implementationFee: 3420, monthlyFee: 195,
       },
       {
         name: "Deal Pipeline (Kanban)",
@@ -241,6 +275,7 @@ export const layers: Layer[] = [
         tags: ["kanban", "workflow"],
         dependencies: ["Deal & Acquisition Tracker"],
         status: "live",
+        hours: 32, complexity: "high", implementationFee: 3040, monthlyFee: 175,
       },
       {
         name: "Contact Management (CRM)",
@@ -248,6 +283,7 @@ export const layers: Layer[] = [
         tags: ["CRM", "timeline"],
         dependencies: ["Team Dashboard & KPIs"],
         status: "live",
+        hours: 40, complexity: "high", implementationFee: 3800, monthlyFee: 195,
       },
       {
         name: "Task Management",
@@ -255,6 +291,7 @@ export const layers: Layer[] = [
         tags: ["tasks", "assignments"],
         dependencies: ["Team Dashboard & KPIs"],
         status: "live",
+        hours: 24, complexity: "medium", implementationFee: 2280, monthlyFee: 125,
       },
       {
         name: "Reporting & Analytics",
@@ -262,6 +299,7 @@ export const layers: Layer[] = [
         tags: ["reports", "PDF export"],
         dependencies: ["Team Dashboard & KPIs"],
         status: "live",
+        hours: 32, complexity: "high", implementationFee: 3040, monthlyFee: 175,
       },
       {
         name: "Property Marketplace",
@@ -269,6 +307,7 @@ export const layers: Layer[] = [
         tags: ["public-facing", "SEO"],
         dependencies: ["Client Dashboard"],
         status: "live",
+        hours: 36, complexity: "high", implementationFee: 3420, monthlyFee: 185,
       },
     ],
   },
@@ -284,6 +323,7 @@ export const layers: Layer[] = [
         tags: ["portfolio", "analytics"],
         dependencies: ["Client Dashboard"],
         status: "live",
+        hours: 28, complexity: "medium", implementationFee: 2660, monthlyFee: 155,
       },
       {
         name: "Fund Dashboard & NAV",
@@ -291,6 +331,7 @@ export const layers: Layer[] = [
         tags: ["funds", "NAV"],
         dependencies: ["Multi-Property Portfolio"],
         status: "live",
+        hours: 40, complexity: "high", implementationFee: 3800, monthlyFee: 225,
       },
       {
         name: "Investor Portal",
@@ -298,6 +339,7 @@ export const layers: Layer[] = [
         tags: ["investors", "reporting"],
         dependencies: ["Fund Dashboard & NAV"],
         status: "live",
+        hours: 36, complexity: "high", implementationFee: 3420, monthlyFee: 195,
       },
       {
         name: "Property Comparison Tool",
@@ -305,6 +347,7 @@ export const layers: Layer[] = [
         tags: ["comparison", "decision support"],
         dependencies: ["Client Dashboard"],
         status: "live",
+        hours: 20, complexity: "medium", implementationFee: 1900, monthlyFee: 95,
       },
       {
         name: "Returns Calculator",
@@ -312,6 +355,7 @@ export const layers: Layer[] = [
         tags: ["IRR", "projections"],
         dependencies: ["Financial Calculator Suite"],
         status: "live",
+        hours: 28, complexity: "high", implementationFee: 2660, monthlyFee: 155,
       },
       {
         name: "Investment Trip Manager",
@@ -319,6 +363,7 @@ export const layers: Layer[] = [
         tags: ["trips", "scheduling"],
         dependencies: ["Client Dashboard"],
         status: "live",
+        hours: 24, complexity: "medium", implementationFee: 2280, monthlyFee: 125,
       },
       {
         name: "Progressive Web App",
@@ -326,6 +371,7 @@ export const layers: Layer[] = [
         tags: ["PWA", "offline"],
         dependencies: ["Client Dashboard"],
         status: "live",
+        hours: 32, complexity: "high", implementationFee: 3040, monthlyFee: 175,
       },
     ],
   },

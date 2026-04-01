@@ -1,164 +1,392 @@
 "use client";
 
+import { useState } from "react";
 import { LocaleProvider } from "@/i18n/LocaleProvider";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { Reveal } from "@/components/ui/Reveal";
 import { mockProperties } from "@/data/mockClients";
 import Link from "next/link";
 import type { Property } from "@/types";
 
-const typeColors: Record<string, string> = {
-  villa: "var(--terracotta)",
-  apartment: "var(--info)",
-  finca: "var(--gold)",
-  penthouse: "var(--success)",
-  townhouse: "var(--terracotta-dim)",
-  plot: "var(--text-muted)",
-};
-
-const statusBadge: Record<string, { bg: string; color: string }> = {
-  available: { bg: "var(--success-bg)", color: "var(--success)" },
-  reserved: { bg: "var(--warning-bg)", color: "var(--warning)" },
-  sold: { bg: "var(--error-bg)", color: "var(--error)" },
-  off_market: { bg: "var(--bg-elevated)", color: "var(--text-muted)" },
-};
+type FilterType = "all" | "villa" | "apartment" | "finca" | "penthouse" | "townhouse";
+type FilterRegion = "all" | "Costa Blanca" | "Costa del Sol" | "Mallorca";
 
 export function PropertiesPage() {
+  const [typeFilter, setTypeFilter] = useState<FilterType>("all");
+  const [regionFilter, setRegionFilter] = useState<FilterRegion>("all");
+
+  const filtered = mockProperties.filter((p) => {
+    if (typeFilter !== "all" && p.type !== typeFilter) return false;
+    if (regionFilter !== "all" && p.region !== regionFilter) return false;
+    return true;
+  });
+
+  const available = mockProperties.filter((p) => p.status === "available").length;
+
   return (
     <LocaleProvider>
       <Header />
-      <main style={{ paddingTop: "calc(var(--header-height) + var(--space-2xl))", paddingBottom: "var(--space-4xl)" }}>
-        <div style={{ maxWidth: "var(--max-content)", margin: "0 auto", padding: "0 var(--space-lg)" }}>
-          <div style={{ marginBottom: "var(--space-2xl)" }}>
-            <h1 style={{ fontSize: "var(--text-4xl)", fontWeight: 500, marginBottom: "var(--space-sm)" }}>
-              Properties
-            </h1>
-            <p style={{ color: "var(--text-muted)", fontSize: "var(--text-lg)" }}>
-              Discover exceptional properties across Spain&apos;s most coveted coastal regions.
-            </p>
+      <main>
+        {/* Hero */}
+        <section
+          style={{
+            paddingTop: "calc(var(--header-height) + var(--space-4xl))",
+            paddingBottom: "var(--space-3xl)",
+            background: "var(--espresso)",
+          }}
+        >
+          <div style={{ maxWidth: "var(--max-content)", margin: "0 auto", padding: "0 var(--space-2xl)" }}>
+            <Reveal direction="up">
+              <span
+                style={{
+                  fontSize: 11,
+                  fontWeight: 300,
+                  letterSpacing: "0.28em",
+                  textTransform: "uppercase",
+                  color: "var(--terracotta)",
+                  display: "block",
+                  marginBottom: "var(--space-lg)",
+                }}
+              >
+                Portfolio — {available} Available
+              </span>
+              <h1
+                style={{
+                  fontFamily: "var(--font-serif)",
+                  fontSize: "clamp(2.5rem, 5vw, 4rem)",
+                  fontWeight: 400,
+                  lineHeight: 1.05,
+                  letterSpacing: "-0.03em",
+                  color: "var(--cream)",
+                  maxWidth: 600,
+                  marginBottom: "var(--space-lg)",
+                }}
+              >
+                Exceptional properties across the Mediterranean
+              </h1>
+            </Reveal>
+            <Reveal direction="up" delay={200}>
+              <p
+                style={{
+                  fontSize: "var(--text-base)",
+                  fontWeight: 300,
+                  lineHeight: 1.8,
+                  color: "rgba(255,255,255,0.4)",
+                  maxWidth: 480,
+                }}
+              >
+                Curated by our agents in Jávea, Marbella, and Mallorca. Every listing verified. Every detail confirmed.
+              </p>
+            </Reveal>
           </div>
+        </section>
 
-          {/* Filter bar */}
+        {/* Filters */}
+        <section
+          style={{
+            background: "#000",
+            borderBottom: "1px solid rgba(255,255,255,0.06)",
+            position: "sticky",
+            top: "var(--header-height)",
+            zIndex: 30,
+          }}
+        >
           <div
             style={{
+              maxWidth: "var(--max-content)",
+              margin: "0 auto",
+              padding: "var(--space-md) var(--space-2xl)",
               display: "flex",
-              gap: "var(--space-sm)",
-              marginBottom: "var(--space-xl)",
+              alignItems: "center",
+              justifyContent: "space-between",
+              gap: "var(--space-xl)",
               flexWrap: "wrap",
             }}
           >
-            {["All", "Villa", "Apartment", "Finca", "Penthouse"].map((type) => (
-              <button
-                key={type}
-                style={{
-                  padding: "8px 20px",
-                  borderRadius: "var(--radius-full)",
-                  fontSize: "var(--text-sm)",
-                  fontWeight: 500,
-                  background: type === "All" ? "var(--espresso)" : "var(--bg-card)",
-                  color: type === "All" ? "var(--cream)" : "var(--text-secondary)",
-                  border: type === "All" ? "none" : "1px solid var(--border-medium)",
-                  transition: "all var(--duration-fast) var(--ease-out)",
-                }}
-              >
-                {type}
-              </button>
-            ))}
-          </div>
+            {/* Type filters */}
+            <div style={{ display: "flex", gap: 4 }}>
+              {(["all", "villa", "apartment", "finca", "penthouse", "townhouse"] as FilterType[]).map((t) => (
+                <button
+                  key={t}
+                  onClick={() => setTypeFilter(t)}
+                  style={{
+                    padding: "8px 18px",
+                    fontSize: 11,
+                    fontWeight: typeFilter === t ? 500 : 300,
+                    letterSpacing: "0.12em",
+                    textTransform: "uppercase",
+                    color: typeFilter === t ? "#fff" : "rgba(255,255,255,0.35)",
+                    background: typeFilter === t ? "var(--terracotta)" : "transparent",
+                    borderRadius: 0,
+                    borderBottomRightRadius: typeFilter === t ? 8 : 0,
+                    transition: "all 0.25s ease",
+                  }}
+                >
+                  {t === "all" ? "All" : t}
+                </button>
+              ))}
+            </div>
 
-          {/* Property grid */}
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fill, minmax(340px, 1fr))",
-              gap: "var(--space-lg)",
-            }}
-          >
-            {mockProperties.map((property) => (
-              <PropertyCard key={property.id} property={property} />
-            ))}
+            {/* Region filters */}
+            <div style={{ display: "flex", gap: 4 }}>
+              {(["all", "Costa Blanca", "Costa del Sol", "Mallorca"] as FilterRegion[]).map((r) => (
+                <button
+                  key={r}
+                  onClick={() => setRegionFilter(r)}
+                  style={{
+                    padding: "8px 16px",
+                    fontSize: 11,
+                    fontWeight: regionFilter === r ? 500 : 300,
+                    letterSpacing: "0.08em",
+                    color: regionFilter === r ? "var(--gold)" : "rgba(255,255,255,0.25)",
+                    background: "transparent",
+                    borderBottom: regionFilter === r ? "1px solid var(--gold)" : "1px solid transparent",
+                    transition: "all 0.25s ease",
+                  }}
+                >
+                  {r === "all" ? "All Regions" : r}
+                </button>
+              ))}
+            </div>
+
+            {/* Count */}
+            <span
+              style={{
+                fontSize: 11,
+                fontWeight: 300,
+                letterSpacing: "0.08em",
+                color: "rgba(255,255,255,0.25)",
+              }}
+            >
+              {filtered.length} {filtered.length === 1 ? "property" : "properties"}
+            </span>
           </div>
-        </div>
+        </section>
+
+        {/* Listings */}
+        <section style={{ padding: "var(--space-3xl) 0 var(--space-4xl)", background: "var(--bg-page)" }}>
+          <div style={{ maxWidth: "var(--max-content)", margin: "0 auto", padding: "0 var(--space-2xl)" }}>
+            {/* Featured — first property large */}
+            {filtered.length > 0 && (
+              <Reveal direction="up">
+                <FeaturedCard property={filtered[0]} />
+              </Reveal>
+            )}
+
+            {/* Grid — remaining */}
+            {filtered.length > 1 && (
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "repeat(3, 1fr)",
+                  gap: "var(--space-lg)",
+                  marginTop: "var(--space-xl)",
+                }}
+                className="property-grid"
+              >
+                {filtered.slice(1).map((property, i) => (
+                  <Reveal key={property.id} direction="up" delay={i * 80}>
+                    <PropertyCard property={property} />
+                  </Reveal>
+                ))}
+              </div>
+            )}
+
+            {filtered.length === 0 && (
+              <div style={{ textAlign: "center", padding: "var(--space-4xl) 0" }}>
+                <p style={{ fontSize: "var(--text-lg)", fontWeight: 300, color: "var(--text-muted)" }}>
+                  No properties match your criteria.
+                </p>
+              </div>
+            )}
+          </div>
+        </section>
       </main>
       <Footer />
+
+      <style>{`
+        @media (max-width: 1024px) {
+          .property-grid { grid-template-columns: repeat(2, 1fr) !important; }
+        }
+        @media (max-width: 640px) {
+          .property-grid { grid-template-columns: 1fr !important; }
+        }
+      `}</style>
     </LocaleProvider>
   );
 }
 
-function PropertyCard({ property }: { property: Property }) {
-  const status = statusBadge[property.status] ?? statusBadge.available;
-  const typeColor = typeColors[property.type] ?? "var(--text-muted)";
-
+/* ── Featured (Large) Card ── */
+function FeaturedCard({ property }: { property: Property }) {
   return (
     <Link
-      href={`/portal/client-1/dashboard`}
+      href={`/properties/${property.id}`}
       style={{
-        background: "var(--bg-card)",
+        display: "grid",
+        gridTemplateColumns: "1.4fr 1fr",
+        background: "var(--espresso)",
         borderRadius: "var(--radius-xl)",
-        border: "1px solid var(--border-subtle)",
         overflow: "hidden",
-        transition: "all var(--duration-normal) var(--ease-out)",
-        display: "block",
+        transition: "transform 0.4s cubic-bezier(0.16,1,0.3,1)",
       }}
-      onMouseEnter={(e) => {
-        e.currentTarget.style.boxShadow = "var(--shadow-xl)";
-        e.currentTarget.style.transform = "translateY(-4px)";
-      }}
-      onMouseLeave={(e) => {
-        e.currentTarget.style.boxShadow = "none";
-        e.currentTarget.style.transform = "translateY(0)";
-      }}
+      className="featured-card"
+      onMouseEnter={(e) => e.currentTarget.style.transform = "translateY(-3px)"}
+      onMouseLeave={(e) => e.currentTarget.style.transform = "translateY(0)"}
     >
-      {/* Image placeholder */}
+      {/* Image area */}
       <div
         style={{
-          height: 220,
-          background: `linear-gradient(135deg, var(--espresso-mid) 0%, var(--espresso-light) 100%)`,
+          minHeight: 380,
+          background: "linear-gradient(135deg, var(--espresso-mid) 0%, var(--espresso-light) 50%, rgba(181,101,74,0.1) 100%)",
           position: "relative",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
         }}
       >
-        {/* Abstract property visualization */}
-        <svg width="80" height="80" viewBox="0 0 80 80" fill="none" opacity={0.3}>
-          <rect x="10" y="30" width="60" height="40" rx="4" stroke="var(--cream)" strokeWidth="1.5" />
-          <path d="M5 35L40 10L75 35" stroke="var(--cream)" strokeWidth="1.5" strokeLinecap="round" />
-          <rect x="30" y="45" width="20" height="25" rx="2" stroke="var(--cream)" strokeWidth="1.5" />
+        <svg width="100" height="100" viewBox="0 0 100 100" fill="none" opacity={0.12}>
+          <rect x="10" y="35" width="80" height="55" rx="4" stroke="var(--cream)" strokeWidth="1" />
+          <path d="M5 40L50 10L95 40" stroke="var(--cream)" strokeWidth="1" strokeLinecap="round" />
+          <rect x="35" y="55" width="30" height="35" rx="2" stroke="var(--cream)" strokeWidth="1" />
         </svg>
+        <StatusBadge status={property.status} style={{ position: "absolute", top: 20, left: 20 }} />
+      </div>
 
-        {/* Status badge */}
+      {/* Content */}
+      <div style={{ padding: "var(--space-2xl)", display: "flex", flexDirection: "column", justifyContent: "center" }}>
         <span
           style={{
-            position: "absolute",
-            top: 12,
-            right: 12,
-            padding: "4px 12px",
-            borderRadius: "var(--radius-full)",
-            background: status.bg,
-            color: status.color,
-            fontSize: "var(--text-xs)",
-            fontWeight: 600,
-            textTransform: "capitalize",
+            fontSize: 11,
+            fontWeight: 300,
+            letterSpacing: "0.28em",
+            textTransform: "uppercase",
+            color: "var(--terracotta)",
+            marginBottom: "var(--space-md)",
           }}
         >
-          {property.status}
+          Featured · {property.type}
         </span>
+        <h2
+          style={{
+            fontFamily: "var(--font-serif)",
+            fontSize: "var(--text-3xl)",
+            fontWeight: 400,
+            color: "var(--cream)",
+            lineHeight: 1.1,
+            marginBottom: "var(--space-sm)",
+          }}
+        >
+          {property.name}
+        </h2>
+        <p
+          style={{
+            fontSize: "var(--text-sm)",
+            fontWeight: 300,
+            color: "rgba(255,255,255,0.35)",
+            marginBottom: "var(--space-xl)",
+          }}
+        >
+          {property.city}, {property.region}
+        </p>
 
-        {/* Type badge */}
+        {/* Specs */}
+        <div style={{ display: "flex", gap: "var(--space-2xl)", marginBottom: "var(--space-xl)" }}>
+          <SpecLight label="Bedrooms" value={property.bedrooms.toString()} />
+          <SpecLight label="Bathrooms" value={property.bathrooms.toString()} />
+          <SpecLight label="Area" value={`${property.area_m2} m²`} />
+          {property.plot_m2 && <SpecLight label="Plot" value={`${property.plot_m2} m²`} />}
+        </div>
+
+        {/* Features */}
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginBottom: "var(--space-xl)" }}>
+          {property.features.slice(0, 4).map((f) => (
+            <span
+              key={f}
+              style={{
+                padding: "4px 12px",
+                fontSize: 10,
+                fontWeight: 300,
+                letterSpacing: "0.06em",
+                color: "rgba(255,255,255,0.4)",
+                border: "1px solid rgba(255,255,255,0.08)",
+                borderRadius: "var(--radius-full)",
+              }}
+            >
+              {f}
+            </span>
+          ))}
+        </div>
+
+        {/* Price */}
+        <div style={{ display: "flex", alignItems: "baseline", gap: "var(--space-md)" }}>
+          <span
+            style={{
+              fontFamily: "var(--font-serif)",
+              fontSize: "var(--text-3xl)",
+              fontWeight: 400,
+              color: "var(--gold)",
+            }}
+          >
+            €{property.price.toLocaleString()}
+          </span>
+          <span style={{ fontSize: 11, color: "rgba(255,255,255,0.2)" }}>
+            €{Math.round(property.price / property.area_m2).toLocaleString()}/m²
+          </span>
+        </div>
+      </div>
+    </Link>
+  );
+}
+
+/* ── Standard Card ── */
+function PropertyCard({ property }: { property: Property }) {
+  return (
+    <Link
+      href={`/properties/${property.id}`}
+      style={{
+        display: "block",
+        background: "var(--bg-card)",
+        overflow: "hidden",
+        transition: "all 0.35s cubic-bezier(0.16,1,0.3,1)",
+        borderRadius: 0,
+        borderBottomRightRadius: "var(--radius-xl)",
+      }}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.transform = "translateY(-4px)";
+        e.currentTarget.style.boxShadow = "0 20px 60px rgba(28,22,16,0.12)";
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.transform = "translateY(0)";
+        e.currentTarget.style.boxShadow = "none";
+      }}
+    >
+      {/* Image */}
+      <div
+        style={{
+          height: 240,
+          background: `linear-gradient(135deg, #1a1510 0%, #2a2018 40%, rgba(181,101,74,0.08) 100%)`,
+          position: "relative",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <svg width="60" height="60" viewBox="0 0 60 60" fill="none" opacity={0.1}>
+          <rect x="8" y="25" width="44" height="30" rx="3" stroke="var(--cream)" strokeWidth="1" />
+          <path d="M4 28L30 8L56 28" stroke="var(--cream)" strokeWidth="1" strokeLinecap="round" />
+        </svg>
+        <StatusBadge status={property.status} style={{ position: "absolute", top: 16, right: 16 }} />
         <span
           style={{
             position: "absolute",
-            top: 12,
-            left: 12,
-            padding: "4px 12px",
-            borderRadius: "var(--radius-full)",
-            background: "rgba(0,0,0,0.5)",
-            backdropFilter: "blur(8px)",
-            color: "var(--cream)",
-            fontSize: "var(--text-xs)",
-            fontWeight: 600,
-            textTransform: "capitalize",
+            bottom: 16,
+            left: 16,
+            fontSize: 10,
+            fontWeight: 300,
+            letterSpacing: "0.2em",
+            textTransform: "uppercase",
+            color: "rgba(255,255,255,0.35)",
           }}
         >
           {property.type}
@@ -166,23 +394,40 @@ function PropertyCard({ property }: { property: Property }) {
       </div>
 
       {/* Content */}
-      <div style={{ padding: "var(--space-lg)" }}>
+      <div style={{ padding: "var(--space-lg) var(--space-lg) var(--space-xl)" }}>
         <h3
           style={{
             fontFamily: "var(--font-serif)",
-            fontSize: "var(--text-xl)",
-            fontWeight: 600,
+            fontSize: "var(--text-lg)",
+            fontWeight: 400,
             marginBottom: 4,
+            lineHeight: 1.25,
           }}
         >
           {property.name}
         </h3>
-        <p style={{ fontSize: "var(--text-sm)", color: "var(--text-muted)", marginBottom: "var(--space-md)" }}>
+        <p
+          style={{
+            fontSize: 12,
+            fontWeight: 300,
+            color: "var(--text-muted)",
+            letterSpacing: "0.04em",
+            marginBottom: "var(--space-lg)",
+          }}
+        >
           {property.city}, {property.region}
         </p>
 
-        {/* Features row */}
-        <div style={{ display: "flex", gap: "var(--space-lg)", marginBottom: "var(--space-md)" }}>
+        {/* Specs row */}
+        <div
+          style={{
+            display: "flex",
+            gap: "var(--space-lg)",
+            paddingBottom: "var(--space-md)",
+            marginBottom: "var(--space-md)",
+            borderBottom: "1px solid var(--border-subtle)",
+          }}
+        >
           <Spec label="Bed" value={property.bedrooms.toString()} />
           <Spec label="Bath" value={property.bathrooms.toString()} />
           <Spec label="m²" value={property.area_m2.toString()} />
@@ -194,14 +439,14 @@ function PropertyCard({ property }: { property: Property }) {
           <span
             style={{
               fontFamily: "var(--font-serif)",
-              fontSize: "var(--text-2xl)",
-              fontWeight: 600,
-              color: typeColor,
+              fontSize: "var(--text-xl)",
+              fontWeight: 400,
+              color: "var(--espresso)",
             }}
           >
             €{property.price.toLocaleString()}
           </span>
-          <span style={{ fontSize: "var(--text-xs)", color: "var(--text-muted)" }}>
+          <span style={{ fontSize: 10, color: "var(--text-muted)", letterSpacing: "0.04em" }}>
             €{Math.round(property.price / property.area_m2).toLocaleString()}/m²
           </span>
         </div>
@@ -213,10 +458,51 @@ function PropertyCard({ property }: { property: Property }) {
 function Spec({ label, value }: { label: string; value: string }) {
   return (
     <div>
-      <div style={{ fontSize: 10, color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.08em" }}>
+      <div style={{ fontSize: 9, fontWeight: 300, color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.12em", marginBottom: 2 }}>
         {label}
       </div>
-      <div style={{ fontSize: "var(--text-sm)", fontWeight: 600 }}>{value}</div>
+      <div style={{ fontSize: "var(--text-sm)", fontWeight: 500 }}>{value}</div>
     </div>
+  );
+}
+
+function SpecLight({ label, value }: { label: string; value: string }) {
+  return (
+    <div>
+      <div style={{ fontSize: 9, fontWeight: 300, color: "rgba(255,255,255,0.25)", textTransform: "uppercase", letterSpacing: "0.12em", marginBottom: 4 }}>
+        {label}
+      </div>
+      <div style={{ fontSize: "var(--text-base)", fontWeight: 400, color: "var(--cream)" }}>{value}</div>
+    </div>
+  );
+}
+
+function StatusBadge({ status, style }: { status: string; style?: React.CSSProperties }) {
+  const config: Record<string, { bg: string; color: string }> = {
+    available: { bg: "rgba(74,124,89,0.9)", color: "#fff" },
+    reserved: { bg: "rgba(201,162,81,0.9)", color: "#fff" },
+    sold: { bg: "rgba(181,74,74,0.85)", color: "#fff" },
+    off_market: { bg: "rgba(255,255,255,0.15)", color: "rgba(255,255,255,0.6)" },
+  };
+  const c = config[status] ?? config.available;
+
+  return (
+    <span
+      style={{
+        ...style,
+        padding: "5px 14px",
+        fontSize: 10,
+        fontWeight: 400,
+        letterSpacing: "0.12em",
+        textTransform: "uppercase",
+        color: c.color,
+        background: c.bg,
+        backdropFilter: "blur(8px)",
+        borderRadius: 0,
+        borderBottomRightRadius: 8,
+      }}
+    >
+      {status === "off_market" ? "Off Market" : status}
+    </span>
   );
 }

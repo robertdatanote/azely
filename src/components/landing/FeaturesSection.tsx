@@ -1,42 +1,37 @@
 "use client";
 
 import { useLocale } from "@/i18n/LocaleProvider";
+import { Reveal } from "@/components/ui/Reveal";
 
 const features = [
   {
     key: "journey",
     number: "01",
-    layer: "Client Journey",
     modules: "Onboarding · Deal Tracker · NIE Flow · Mortgage · E-Sign",
   },
   {
     key: "operations",
     number: "02",
-    layer: "Property Operations",
     modules: "Renovation · Rental · Pricing · Contractors · Utilities",
   },
   {
     key: "compliance",
     number: "03",
-    layer: "Intelligence",
     modules: "Tax Dashboard · Compliance · Cost Calculator · Market Intel",
   },
   {
     key: "team",
     number: "04",
-    layer: "Team & CRM",
     modules: "Pipeline · Contacts · KPIs · Reporting · Marketplace",
   },
   {
     key: "scale",
     number: "05",
-    layer: "Scale & Invest",
     modules: "Portfolio · Fund Management · Investor Portal · Returns",
   },
   {
     key: "foundation",
     number: "06",
-    layer: "Foundation",
     modules: "Auth · White-Label · i18n · Dashboard · Documents · Notifications",
   },
 ];
@@ -58,131 +53,130 @@ export function FeaturesSection() {
         style={{
           maxWidth: "var(--max-content)",
           margin: "0 auto",
-          padding: "0 var(--space-xl)",
+          padding: "0 var(--space-2xl)",
         }}
       >
-        {/* Section header — left-aligned, editorial */}
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: "var(--space-2xl)",
-            marginBottom: "var(--space-3xl)",
-            alignItems: "end",
-          }}
-          className="features-header"
-        >
-          <div>
-            <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: "var(--space-md)" }}>
-              <div style={{ width: 32, height: 1, background: "var(--terracotta)" }} />
+        {/* Header */}
+        <Reveal direction="up">
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gap: "var(--space-3xl)",
+              marginBottom: "var(--space-3xl)",
+              alignItems: "end",
+            }}
+            className="features-header"
+          >
+            <div>
               <span
                 style={{
                   fontSize: 11,
-                  fontWeight: 500,
-                  letterSpacing: "var(--tracking-widest)",
+                  fontWeight: 300,
+                  letterSpacing: "0.28em",
                   textTransform: "uppercase",
                   color: "var(--terracotta)",
+                  display: "block",
+                  marginBottom: "var(--space-lg)",
                 }}
               >
-                Platform
+                The Platform
               </span>
+              <h2
+                style={{
+                  fontFamily: "var(--font-serif)",
+                  fontSize: "clamp(2rem, 4vw, 3rem)",
+                  fontWeight: 400,
+                  lineHeight: 1.08,
+                  letterSpacing: "-0.025em",
+                }}
+              >
+                {title}
+              </h2>
             </div>
-            <h2
+            <p
               style={{
-                fontFamily: "var(--font-serif)",
-                fontSize: "clamp(1.75rem, 3.5vw, 2.75rem)",
-                fontWeight: 400,
-                lineHeight: 1.15,
-                letterSpacing: "-0.02em",
+                fontSize: "var(--text-base)",
+                fontWeight: 300,
+                color: "var(--text-muted)",
+                lineHeight: 1.8,
+                maxWidth: 440,
               }}
             >
-              {title}
-            </h2>
+              {subtitle}
+            </p>
           </div>
-          <p
-            style={{
-              fontSize: "var(--text-base)",
-              color: "var(--text-muted)",
-              lineHeight: 1.7,
-              maxWidth: 440,
-            }}
-          >
-            {subtitle}
-          </p>
-        </div>
+        </Reveal>
 
-        {/* Feature rows — clean, no cards */}
-        <div style={{ borderTop: "1px solid var(--border-subtle)" }}>
-          {features.map((feat) => {
+        {/* Feature rows */}
+        <div style={{ borderTop: "1px solid var(--border-medium)" }}>
+          {features.map((feat, i) => {
             const fd = featureDict[feat.key] as Record<string, string> | undefined;
             return (
-              <div
-                key={feat.key}
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "60px 1fr 1.2fr 1.5fr",
-                  gap: "var(--space-xl)",
-                  padding: "var(--space-xl) 0",
-                  borderBottom: "1px solid var(--border-subtle)",
-                  alignItems: "baseline",
-                  transition: "background var(--duration-fast)",
-                  cursor: "default",
-                }}
-                className="feature-row"
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = "rgba(181, 101, 74, 0.02)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = "transparent";
-                }}
-              >
-                {/* Number */}
-                <span
+              <Reveal key={feat.key} direction="up" delay={i * 80}>
+                <div
                   style={{
-                    fontFamily: "var(--font-serif)",
-                    fontSize: "var(--text-sm)",
-                    color: "var(--terracotta)",
-                    fontWeight: 500,
+                    display: "grid",
+                    gridTemplateColumns: "60px 1.2fr 1.8fr 1.2fr",
+                    gap: "var(--space-xl)",
+                    padding: "var(--space-lg) 0",
+                    borderBottom: "1px solid var(--border-subtle)",
+                    alignItems: "center",
+                    cursor: "default",
+                    transition: "all 0.3s ease",
+                  }}
+                  className="feature-row"
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.paddingLeft = "var(--space-md)";
+                    e.currentTarget.style.borderBottomColor = "var(--terracotta)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.paddingLeft = "0";
+                    e.currentTarget.style.borderBottomColor = "var(--border-subtle)";
                   }}
                 >
-                  {feat.number}
-                </span>
-
-                {/* Layer name */}
-                <h3
-                  style={{
-                    fontFamily: "var(--font-serif)",
-                    fontSize: "var(--text-xl)",
-                    fontWeight: 500,
-                    color: "var(--text-primary)",
-                  }}
-                >
-                  {fd?.title ?? feat.layer}
-                </h3>
-
-                {/* Description */}
-                <p
-                  style={{
-                    fontSize: "var(--text-sm)",
-                    color: "var(--text-muted)",
-                    lineHeight: 1.7,
-                  }}
-                >
-                  {fd?.description ?? ""}
-                </p>
-
-                {/* Module list */}
-                <span
-                  style={{
-                    fontSize: "var(--text-xs)",
-                    color: "var(--text-muted)",
-                    opacity: 0.6,
-                    letterSpacing: "0.01em",
-                  }}
-                >
-                  {feat.modules}
-                </span>
-              </div>
+                  <span
+                    style={{
+                      fontFamily: "var(--font-serif)",
+                      fontSize: "var(--text-sm)",
+                      fontWeight: 300,
+                      color: "var(--terracotta)",
+                    }}
+                  >
+                    {feat.number}
+                  </span>
+                  <h3
+                    style={{
+                      fontFamily: "var(--font-serif)",
+                      fontSize: "var(--text-xl)",
+                      fontWeight: 400,
+                    }}
+                  >
+                    {fd?.title ?? feat.key}
+                  </h3>
+                  <p
+                    style={{
+                      fontSize: "var(--text-sm)",
+                      fontWeight: 300,
+                      color: "var(--text-muted)",
+                      lineHeight: 1.7,
+                    }}
+                  >
+                    {fd?.description ?? ""}
+                  </p>
+                  <span
+                    style={{
+                      fontSize: 11,
+                      fontWeight: 300,
+                      color: "var(--text-muted)",
+                      opacity: 0.5,
+                      letterSpacing: "0.02em",
+                    }}
+                  >
+                    {feat.modules}
+                  </span>
+                </div>
+              </Reveal>
             );
           })}
         </div>

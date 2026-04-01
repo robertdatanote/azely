@@ -2,6 +2,7 @@
 
 import { AzelyLogo } from "@/components/brand/AzelyLogo";
 import { useLocale } from "@/i18n/LocaleProvider";
+import { Reveal } from "@/components/ui/Reveal";
 import Link from "next/link";
 
 export function Footer() {
@@ -12,8 +13,8 @@ export function Footer() {
   return (
     <footer
       style={{
-        background: "var(--espresso)",
-        color: "var(--text-inverse)",
+        background: "#000",
+        color: "#fff",
         padding: "var(--space-4xl) 0 var(--space-2xl)",
       }}
     >
@@ -21,160 +22,100 @@ export function Footer() {
         style={{
           maxWidth: "var(--max-wide)",
           margin: "0 auto",
-          padding: "0 var(--space-lg)",
+          padding: "0 var(--space-2xl)",
         }}
       >
+        {/* Top — logo + nav */}
+        <Reveal direction="up">
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "flex-start",
+              paddingBottom: "var(--space-3xl)",
+              borderBottom: "1px solid rgba(255,255,255,0.06)",
+              flexWrap: "wrap",
+              gap: "var(--space-2xl)",
+            }}
+          >
+            <div>
+              <AzelyLogo size="md" color="light" />
+              <p
+                style={{
+                  marginTop: "var(--space-lg)",
+                  fontSize: "var(--text-sm)",
+                  fontWeight: 300,
+                  color: "rgba(255,255,255,0.35)",
+                  lineHeight: 1.8,
+                  maxWidth: 340,
+                }}
+              >
+                {footer.description}
+              </p>
+            </div>
+
+            {/* Nav columns */}
+            <div style={{ display: "flex", gap: "var(--space-4xl)" }} className="footer-nav">
+              <FooterCol
+                title={footer.platform}
+                links={[
+                  { label: nav.properties, href: "/properties" },
+                  { label: nav.marketplace, href: "/marketplace" },
+                  { label: nav.portal, href: "/portal/client-1/dashboard" },
+                  { label: nav.team, href: "/team" },
+                ]}
+              />
+              <FooterCol
+                title={footer.company}
+                links={[
+                  { label: footer.about },
+                  { label: footer.careers },
+                  { label: footer.blog },
+                ]}
+              />
+              <FooterCol
+                title={footer.legal}
+                links={[
+                  { label: footer.privacy },
+                  { label: footer.terms },
+                  { label: footer.cookies },
+                ]}
+              />
+            </div>
+          </div>
+        </Reveal>
+
+        {/* Bottom */}
         <div
           style={{
-            display: "grid",
-            gridTemplateColumns: "2fr 1fr 1fr 1fr",
-            gap: "var(--space-3xl)",
-            marginBottom: "var(--space-3xl)",
-          }}
-          className="footer-grid"
-        >
-          {/* Brand */}
-          <div>
-            <AzelyLogo size="md" color="light" />
-            <p
-              style={{
-                marginTop: "var(--space-lg)",
-                fontSize: "var(--text-sm)",
-                color: "var(--gold-wheat)",
-                lineHeight: "var(--leading-relaxed)",
-                maxWidth: 320,
-              }}
-            >
-              {footer.description}
-            </p>
-          </div>
-
-          {/* Platform */}
-          <div>
-            <h4
-              style={{
-                fontSize: "var(--text-xs)",
-                fontWeight: 600,
-                letterSpacing: "var(--tracking-widest)",
-                textTransform: "uppercase",
-                color: "var(--gold)",
-                marginBottom: "var(--space-lg)",
-                fontFamily: "var(--font-sans)",
-              }}
-            >
-              {footer.platform}
-            </h4>
-            <nav style={{ display: "flex", flexDirection: "column", gap: "var(--space-sm)" }}>
-              {[
-                { href: "/properties", label: nav.properties },
-                { href: "/marketplace", label: nav.marketplace },
-                { href: "/portal/client-1/dashboard", label: nav.portal },
-                { href: "/team", label: nav.team },
-              ].map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  style={{
-                    fontSize: "var(--text-sm)",
-                    color: "var(--linen)",
-                    opacity: 0.7,
-                    transition: "opacity var(--duration-fast)",
-                  }}
-                  onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
-                  onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.7")}
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </nav>
-          </div>
-
-          {/* Company */}
-          <div>
-            <h4
-              style={{
-                fontSize: "var(--text-xs)",
-                fontWeight: 600,
-                letterSpacing: "var(--tracking-widest)",
-                textTransform: "uppercase",
-                color: "var(--gold)",
-                marginBottom: "var(--space-lg)",
-                fontFamily: "var(--font-sans)",
-              }}
-            >
-              {footer.company}
-            </h4>
-            <nav style={{ display: "flex", flexDirection: "column", gap: "var(--space-sm)" }}>
-              {[footer.about, footer.careers, footer.blog].map((label) => (
-                <span
-                  key={label}
-                  style={{
-                    fontSize: "var(--text-sm)",
-                    color: "var(--linen)",
-                    opacity: 0.7,
-                    cursor: "pointer",
-                  }}
-                >
-                  {label}
-                </span>
-              ))}
-            </nav>
-          </div>
-
-          {/* Legal */}
-          <div>
-            <h4
-              style={{
-                fontSize: "var(--text-xs)",
-                fontWeight: 600,
-                letterSpacing: "var(--tracking-widest)",
-                textTransform: "uppercase",
-                color: "var(--gold)",
-                marginBottom: "var(--space-lg)",
-                fontFamily: "var(--font-sans)",
-              }}
-            >
-              {footer.legal}
-            </h4>
-            <nav style={{ display: "flex", flexDirection: "column", gap: "var(--space-sm)" }}>
-              {[footer.privacy, footer.terms, footer.cookies].map((label) => (
-                <span
-                  key={label}
-                  style={{
-                    fontSize: "var(--text-sm)",
-                    color: "var(--linen)",
-                    opacity: 0.7,
-                    cursor: "pointer",
-                  }}
-                >
-                  {label}
-                </span>
-              ))}
-            </nav>
-          </div>
-        </div>
-
-        {/* Divider + Copyright */}
-        <div
-          style={{
-            borderTop: "1px solid rgba(240, 235, 224, 0.1)",
-            paddingTop: "var(--space-lg)",
+            paddingTop: "var(--space-xl)",
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
+            flexWrap: "wrap",
+            gap: "var(--space-md)",
           }}
         >
-          <span style={{ fontSize: "var(--text-xs)", color: "var(--text-muted)" }}>
+          <span
+            style={{
+              fontSize: 11,
+              fontWeight: 300,
+              color: "rgba(255,255,255,0.2)",
+              letterSpacing: "0.04em",
+            }}
+          >
             {footer.copyright}
           </span>
-          <div style={{ display: "flex", gap: "var(--space-lg)" }}>
+          <div style={{ display: "flex", gap: "var(--space-xl)" }}>
             {["Amsterdam", "Jávea", "Marbella"].map((city) => (
               <span
                 key={city}
                 style={{
-                  fontSize: "var(--text-xs)",
-                  color: "var(--gold-wheat)",
-                  opacity: 0.6,
+                  fontSize: 11,
+                  fontWeight: 300,
+                  letterSpacing: "0.08em",
+                  color: "rgba(255,255,255,0.15)",
+                  textTransform: "uppercase",
                 }}
               >
                 {city}
@@ -186,12 +127,67 @@ export function Footer() {
 
       <style>{`
         @media (max-width: 768px) {
-          .footer-grid { grid-template-columns: 1fr 1fr !important; }
-        }
-        @media (max-width: 480px) {
-          .footer-grid { grid-template-columns: 1fr !important; }
+          .footer-nav { flex-direction: column; gap: var(--space-xl) !important; }
         }
       `}</style>
     </footer>
+  );
+}
+
+function FooterCol({
+  title,
+  links,
+}: {
+  title: string;
+  links: { label: string; href?: string }[];
+}) {
+  return (
+    <div>
+      <h4
+        style={{
+          fontSize: 11,
+          fontWeight: 400,
+          letterSpacing: "0.28em",
+          textTransform: "uppercase",
+          color: "rgba(255,255,255,0.25)",
+          marginBottom: "var(--space-lg)",
+          fontFamily: "var(--font-sans)",
+        }}
+      >
+        {title}
+      </h4>
+      <nav style={{ display: "flex", flexDirection: "column", gap: "var(--space-sm)" }}>
+        {links.map((link) =>
+          link.href ? (
+            <Link
+              key={link.label}
+              href={link.href}
+              style={{
+                fontSize: "var(--text-sm)",
+                fontWeight: 300,
+                color: "rgba(255,255,255,0.45)",
+                transition: "color 0.2s",
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = "#fff")}
+              onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.45)")}
+            >
+              {link.label}
+            </Link>
+          ) : (
+            <span
+              key={link.label}
+              style={{
+                fontSize: "var(--text-sm)",
+                fontWeight: 300,
+                color: "rgba(255,255,255,0.45)",
+                cursor: "default",
+              }}
+            >
+              {link.label}
+            </span>
+          )
+        )}
+      </nav>
+    </div>
   );
 }

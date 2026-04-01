@@ -1,0 +1,131 @@
+{
+  "common": {
+    "azely": "Azely",
+    "tagline": "Project Clarity, By Design",
+    "login": "Sign In",
+    "register": "Get Started",
+    "contact": "Contact Us",
+    "learnMore": "Learn More",
+    "viewAll": "View All",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "back": "Back",
+    "next": "Next",
+    "search": "Search",
+    "filter": "Filter",
+    "loading": "Loading...",
+    "noResults": "No results found",
+    "language": "Language"
+  },
+  "nav": {
+    "home": "Home",
+    "properties": "Properties",
+    "about": "About",
+    "services": "Services",
+    "portal": "Client Portal",
+    "team": "For Agencies",
+    "marketplace": "Marketplace"
+  },
+  "hero": {
+    "title": "Your Spanish Property Journey, Simplified",
+    "subtitle": "From first viewing to golden keys — Azely guides cross-border buyers through every step of acquiring property in Spain.",
+    "cta": "Explore Properties",
+    "ctaSecondary": "How It Works"
+  },
+  "features": {
+    "title": "Everything You Need, Nothing You Don't",
+    "subtitle": "39 modules across 6 layers — pick exactly what your agency needs.",
+    "journey": {
+      "title": "Client Journey",
+      "description": "Onboarding, deal tracking, NIE applications, mortgage comparison, e-signatures — the complete buyer experience."
+    },
+    "operations": {
+      "title": "Property Operations",
+      "description": "Renovation management, rental dashboards, dynamic pricing, contractor marketplace — maximize property value."
+    },
+    "compliance": {
+      "title": "Intelligence & Compliance",
+      "description": "Cross-border tax dashboards, regulatory compliance, cost calculators — navigate bureaucracy with confidence."
+    },
+    "team": {
+      "title": "Team & CRM",
+      "description": "Deal pipelines, contact management, KPI dashboards, reporting — run your agency like a machine."
+    },
+    "scale": {
+      "title": "Scale & Invest",
+      "description": "Multi-property portfolios, fund management, investor portals — from single buyer to institutional scale."
+    },
+    "foundation": {
+      "title": "White-Label Foundation",
+      "description": "Your brand, your colors, your domain. Multi-language, document vaults, notifications — all built in."
+    }
+  },
+  "stats": {
+    "properties": "Properties Managed",
+    "countries": "Countries Connected",
+    "clients": "Happy Clients",
+    "modules": "Platform Modules"
+  },
+  "regions": {
+    "title": "Spanning the Mediterranean",
+    "subtitle": "From the Costa Blanca to the Algarve — wherever Northern Europeans are buying, Azely is there.",
+    "costaBlanca": "Costa Blanca",
+    "costaSol": "Costa del Sol",
+    "balearics": "Balearic Islands",
+    "algarve": "Algarve",
+    "coteDazur": "Côte d'Azur"
+  },
+  "cta": {
+    "title": "Ready to Transform Your Agency?",
+    "subtitle": "Join the platform that's redefining cross-border real estate. Start with what you need, scale as you grow.",
+    "button": "Request a Demo",
+    "note": "No commitment required. See Azely in action."
+  },
+  "footer": {
+    "description": "State-of-the-art real estate platform for cross-border European property agencies.",
+    "platform": "Platform",
+    "company": "Company",
+    "legal": "Legal",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "cookies": "Cookie Policy",
+    "about": "About Us",
+    "careers": "Careers",
+    "blog": "Blog",
+    "copyright": "© 2026 Azely. All rights reserved."
+  },
+  "dashboard": {
+    "greeting": "Welcome back",
+    "overview": "Your Overview",
+    "dealProgress": "Deal Progress",
+    "upcomingTasks": "Upcoming Tasks",
+    "recentDocuments": "Recent Documents",
+    "propertyDetails": "Property Details",
+    "quickActions": "Quick Actions",
+    "messages": "Messages",
+    "notifications": "Notifications"
+  },
+  "portal": {
+    "dashboard": "Dashboard",
+    "deal": "Deal Tracker",
+    "documents": "Documents",
+    "onboarding": "Onboarding",
+    "messages": "Messages",
+    "renovation": "Renovation",
+    "rental": "Rental",
+    "rentalManagement": "Rental Management",
+    "pricing": "Dynamic Pricing",
+    "contractors": "Contractors",
+    "compliance": "Compliance",
+    "tax": "Tax Dashboard",
+    "costOfOwnership": "Cost Calculator",
+    "calendar": "Calendar",
+    "mortgage": "Mortgage",
+    "utilities": "Utilities",
+    "comunidad": "Community",
+    "content": "Market Intel",
+    "portfolio": "Portfolio"
+  }
+}

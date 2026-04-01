@@ -36,6 +36,9 @@ yarn-error.log*
 # vercel
 .vercel
 
+# tmp build dir (spaces in path workaround)
+/tmp/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

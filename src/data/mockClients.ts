@@ -1,0 +1,247 @@
+import type { Client, Property, DealStageEntry, Document, Notification, RenovationProject, RenovationPhase, RentalProjection, RentalMonth, MortgageOption } from "@/types";
+
+// ── Properties ──
+export const mockProperties: Property[] = [
+  {
+    id: "prop-1",
+    name: "Villa Mediterráneo",
+    type: "villa",
+    status: "reserved",
+    address: "Calle del Mar 14",
+    city: "Jávea",
+    region: "Costa Blanca",
+    country: "Spain",
+    bedrooms: 4,
+    bathrooms: 3,
+    area_m2: 240,
+    plot_m2: 800,
+    price: 685000,
+    currency: "EUR",
+    features: ["Private pool", "Sea view", "Garage", "Garden", "Air conditioning", "Underfloor heating"],
+    images: [],
+    coordinates: { lat: 38.7896, lng: 0.1660 },
+    energy_rating: "B",
+    year_built: 2019,
+    created_at: "2025-08-15T00:00:00Z",
+  },
+  {
+    id: "prop-2",
+    name: "Apartamento Sol y Mar",
+    type: "apartment",
+    status: "available",
+    address: "Avenida de la Constitución 28, 3B",
+    city: "Moraira",
+    region: "Costa Blanca",
+    country: "Spain",
+    bedrooms: 2,
+    bathrooms: 2,
+    area_m2: 95,
+    price: 325000,
+    currency: "EUR",
+    features: ["Communal pool", "Sea view", "Terrace", "Parking", "Air conditioning"],
+    images: [],
+    coordinates: { lat: 38.6875, lng: 0.1441 },
+    energy_rating: "C",
+    year_built: 2021,
+    created_at: "2025-09-20T00:00:00Z",
+  },
+  {
+    id: "prop-3",
+    name: "Finca Los Olivos",
+    type: "finca",
+    status: "available",
+    address: "Partida Les Sorts, Parcela 42",
+    city: "Benissa",
+    region: "Costa Blanca",
+    country: "Spain",
+    bedrooms: 5,
+    bathrooms: 4,
+    area_m2: 350,
+    plot_m2: 2500,
+    price: 895000,
+    currency: "EUR",
+    features: ["Olive grove", "Mountain view", "Pool", "Guest house", "BBQ area", "Wine cellar"],
+    images: [],
+    coordinates: { lat: 38.7230, lng: 0.0510 },
+    energy_rating: "D",
+    year_built: 1985,
+    created_at: "2025-07-10T00:00:00Z",
+  },
+  {
+    id: "prop-4",
+    name: "Penthouse Playa Arenal",
+    type: "penthouse",
+    status: "sold",
+    address: "Paseo Marítimo 6, Ático",
+    city: "Jávea",
+    region: "Costa Blanca",
+    country: "Spain",
+    bedrooms: 3,
+    bathrooms: 2,
+    area_m2: 165,
+    price: 520000,
+    currency: "EUR",
+    features: ["Rooftop terrace", "Panoramic sea view", "Modern kitchen", "2 parking spots"],
+    images: [],
+    coordinates: { lat: 38.7810, lng: 0.1820 },
+    energy_rating: "A",
+    year_built: 2023,
+    created_at: "2025-06-01T00:00:00Z",
+  },
+];
+
+// ── Clients ──
+export const mockClients: Client[] = [
+  {
+    id: "client-1",
+    profile_id: "prof-1",
+    property_id: "prop-1",
+    property: mockProperties[0],
+    agent_id: "agent-1",
+    deal_stage: "due_diligence",
+    active_features: ["deal", "documents", "renovation", "mortgage", "compliance", "tax"],
+    budget_min: 500000,
+    budget_max: 750000,
+    preferred_regions: ["Costa Blanca"],
+    nationality: "NL",
+    created_at: "2025-07-01T00:00:00Z",
+  },
+  {
+    id: "client-2",
+    profile_id: "prof-2",
+    property_id: "prop-2",
+    property: mockProperties[1],
+    agent_id: "agent-1",
+    deal_stage: "viewing",
+    active_features: ["deal", "documents", "onboarding"],
+    budget_min: 250000,
+    budget_max: 400000,
+    preferred_regions: ["Costa Blanca", "Costa del Sol"],
+    nationality: "NL",
+    created_at: "2025-10-15T00:00:00Z",
+  },
+  {
+    id: "client-3",
+    profile_id: "prof-3",
+    property_id: "prop-3",
+    property: mockProperties[2],
+    agent_id: "agent-2",
+    deal_stage: "offer",
+    active_features: ["deal", "documents", "renovation", "rental", "compliance", "tax", "cost-of-ownership"],
+    budget_min: 700000,
+    budget_max: 1000000,
+    preferred_regions: ["Costa Blanca"],
+    nationality: "BE",
+    created_at: "2025-09-01T00:00:00Z",
+  },
+  {
+    id: "client-4",
+    profile_id: "prof-4",
+    property_id: "prop-4",
+    property: mockProperties[3],
+    agent_id: "agent-1",
+    deal_stage: "completed",
+    active_features: ["deal", "documents", "renovation", "rental", "rental-management", "pricing", "compliance", "tax", "portfolio"],
+    budget_min: 400000,
+    budget_max: 600000,
+    preferred_regions: ["Costa Blanca"],
+    nationality: "NL",
+    created_at: "2025-03-15T00:00:00Z",
+  },
+];
+
+// ── Deal Stages ──
+export const mockDealStages: Record<string, DealStageEntry[]> = {
+  "client-1": [
+    { id: "ds-1", client_id: "client-1", stage_key: "inquiry", status: "completed", date: "2025-07-01", note: "Contacted via website" },
+    { id: "ds-2", client_id: "client-1", stage_key: "viewing", status: "completed", date: "2025-07-15", note: "Viewed 3 properties in Jávea" },
+    { id: "ds-3", client_id: "client-1", stage_key: "offer", status: "completed", date: "2025-08-02", note: "Offer submitted: €670,000" },
+    { id: "ds-4", client_id: "client-1", stage_key: "negotiation", status: "completed", date: "2025-08-10", note: "Counter: €685,000 — accepted" },
+    { id: "ds-5", client_id: "client-1", stage_key: "accepted", status: "completed", date: "2025-08-12" },
+    { id: "ds-6", client_id: "client-1", stage_key: "due_diligence", status: "active", date: "2025-08-20", note: "Nota simple obtained. Awaiting survey results." },
+    { id: "ds-7", client_id: "client-1", stage_key: "notary", status: "pending" },
+    { id: "ds-8", client_id: "client-1", stage_key: "completed", status: "pending" },
+  ],
+};
+
+// ── Documents ──
+export const mockDocuments: Record<string, Document[]> = {
+  "client-1": [
+    { id: "doc-1", client_id: "client-1", name: "Passport — Jan Bergman", category: "identity", status: "verified", uploaded_at: "2025-07-02T00:00:00Z" },
+    { id: "doc-2", client_id: "client-1", name: "NIE Certificate", category: "identity", status: "verified", uploaded_at: "2025-07-20T00:00:00Z" },
+    { id: "doc-3", client_id: "client-1", name: "Nota Simple — Villa Mediterráneo", category: "property", status: "uploaded", uploaded_at: "2025-08-22T00:00:00Z" },
+    { id: "doc-4", client_id: "client-1", name: "Mortgage Pre-Approval — ING", category: "financial", status: "verified", uploaded_at: "2025-08-05T00:00:00Z" },
+    { id: "doc-5", client_id: "client-1", name: "Energy Certificate (CEE)", category: "property", status: "pending" },
+    { id: "doc-6", client_id: "client-1", name: "Spanish Tax Number (NIF)", category: "tax", status: "pending" },
+    { id: "doc-7", client_id: "client-1", name: "Purchase Contract (Arras)", category: "contract", status: "uploaded", uploaded_at: "2025-08-15T00:00:00Z" },
+    { id: "doc-8", client_id: "client-1", name: "Building Survey Report", category: "property", status: "pending" },
+  ],
+};
+
+// ── Notifications ──
+export const mockNotifications: Notification[] = [
+  { id: "n-1", profile_id: "prof-1", title: "Survey scheduled", body: "Building survey for Villa Mediterráneo is scheduled for Oct 5.", type: "info", read: false, link: "/portal/client-1/deal", created_at: "2025-09-28T10:00:00Z" },
+  { id: "n-2", profile_id: "prof-1", title: "Document required", body: "Please upload your Spanish tax number (NIF) to proceed.", type: "action", read: false, link: "/portal/client-1/documents", created_at: "2025-09-27T14:30:00Z" },
+  { id: "n-3", profile_id: "prof-1", title: "Mortgage update", body: "ING has confirmed your pre-approval at 3.2% fixed for 25 years.", type: "success", read: true, link: "/portal/client-1/mortgage", created_at: "2025-09-25T09:00:00Z" },
+  { id: "n-4", profile_id: "prof-1", title: "Notary appointment", body: "Tentative notary date: November 15, 2025. Confirm availability.", type: "deadline", read: false, link: "/portal/client-1/deal", created_at: "2025-09-24T16:00:00Z" },
+];
+
+// ── Renovation ──
+export const mockRenovation: RenovationProject = {
+  id: "reno-1",
+  property_id: "prop-1",
+  client_id: "client-1",
+  name: "Villa Mediterráneo — Full Renovation",
+  budget: 85000,
+  spent: 34200,
+  completion: 42,
+  project_manager: "Carlos Martínez",
+  start_date: "2025-09-01",
+  end_date: "2026-02-28",
+};
+
+export const mockRenovationPhases: RenovationPhase[] = [
+  { id: "ph-1", project_id: "reno-1", name: "Demolition & Structural", status: "completed", budget: 12000, spent: 11800, progress: 100, order: 1 },
+  { id: "ph-2", project_id: "reno-1", name: "Plumbing & Electrical", status: "completed", budget: 18000, spent: 17400, progress: 100, order: 2 },
+  { id: "ph-3", project_id: "reno-1", name: "Kitchen & Bathrooms", status: "in_progress", budget: 25000, spent: 5000, progress: 35, order: 3 },
+  { id: "ph-4", project_id: "reno-1", name: "Flooring & Painting", status: "planned", budget: 15000, spent: 0, progress: 0, order: 4 },
+  { id: "ph-5", project_id: "reno-1", name: "Pool & Landscaping", status: "planned", budget: 15000, spent: 0, progress: 0, order: 5 },
+];
+
+// ── Rental ──
+export const mockRentalProjection: RentalProjection = {
+  id: "rent-1",
+  property_id: "prop-4",
+  status: "active",
+  platforms: ["Airbnb", "Booking.com", "Vrbo"],
+  nightly_low: 120,
+  nightly_high: 280,
+  occupancy_target: 72,
+  annual_revenue_estimate: 48600,
+  licence_number: "VT-467231-A",
+};
+
+export const mockRentalMonths: RentalMonth[] = [
+  { id: "rm-1", property_id: "prop-4", month: "2025-04", revenue: 2800, occupancy: 45, bookings: 3 },
+  { id: "rm-2", property_id: "prop-4", month: "2025-05", revenue: 3600, occupancy: 58, bookings: 4 },
+  { id: "rm-3", property_id: "prop-4", month: "2025-06", revenue: 5200, occupancy: 78, bookings: 5 },
+  { id: "rm-4", property_id: "prop-4", month: "2025-07", revenue: 7400, occupancy: 92, bookings: 6 },
+  { id: "rm-5", property_id: "prop-4", month: "2025-08", revenue: 7800, occupancy: 95, bookings: 7 },
+  { id: "rm-6", property_id: "prop-4", month: "2025-09", revenue: 5600, occupancy: 75, bookings: 5 },
+];
+
+// ── Mortgages ──
+export const mockMortgages: MortgageOption[] = [
+  { id: "m-1", provider: "ING Spain", type: "fixed", amount: 480000, rate: 3.2, term_years: 25, monthly_payment: 2328, total_cost: 698400, ltv: 70, status: "approved" },
+  { id: "m-2", provider: "CaixaBank", type: "variable", amount: 480000, rate: 2.8, term_years: 25, monthly_payment: 2210, total_cost: 663000, ltv: 70, status: "exploring" },
+  { id: "m-3", provider: "Sabadell", type: "mixed", amount: 500000, rate: 3.0, term_years: 30, monthly_payment: 2108, total_cost: 632400, ltv: 73, status: "exploring" },
+];
+
+// ── Helper ──
+export function getClientById(id: string) {
+  return mockClients.find((c) => c.id === id) ?? mockClients[0];
+}
+
+export function getPropertyById(id: string) {
+  return mockProperties.find((p) => p.id === id);
+}

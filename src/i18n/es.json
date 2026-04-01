@@ -1,0 +1,131 @@
+{
+  "common": {
+    "azely": "Azely",
+    "tagline": "Project Clarity, By Design",
+    "login": "Iniciar sesión",
+    "register": "Empezar",
+    "contact": "Contacto",
+    "learnMore": "Más información",
+    "viewAll": "Ver todo",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "back": "Volver",
+    "next": "Siguiente",
+    "search": "Buscar",
+    "filter": "Filtrar",
+    "loading": "Cargando...",
+    "noResults": "No se encontraron resultados",
+    "language": "Idioma"
+  },
+  "nav": {
+    "home": "Inicio",
+    "properties": "Propiedades",
+    "about": "Sobre nosotros",
+    "services": "Servicios",
+    "portal": "Portal del cliente",
+    "team": "Para agencias",
+    "marketplace": "Marketplace"
+  },
+  "hero": {
+    "title": "Su viaje inmobiliario en España, simplificado",
+    "subtitle": "Desde la primera visita hasta las llaves doradas — Azely guía a los compradores transfronterizos en cada paso de la adquisición de propiedades en España.",
+    "cta": "Explorar propiedades",
+    "ctaSecondary": "Cómo funciona"
+  },
+  "features": {
+    "title": "Todo lo que necesita, nada que no",
+    "subtitle": "39 módulos en 6 capas — elija exactamente lo que su agencia necesita.",
+    "journey": {
+      "title": "Viaje del cliente",
+      "description": "Onboarding, seguimiento de operaciones, solicitudes NIE, comparación de hipotecas, firma electrónica — la experiencia completa del comprador."
+    },
+    "operations": {
+      "title": "Gestión inmobiliaria",
+      "description": "Gestión de reformas, paneles de alquiler, precios dinámicos, mercado de contratistas — maximice el valor de la propiedad."
+    },
+    "compliance": {
+      "title": "Inteligencia y cumplimiento",
+      "description": "Paneles fiscales transfronterizos, cumplimiento normativo, calculadoras de costes — navegue la burocracia con confianza."
+    },
+    "team": {
+      "title": "Equipo y CRM",
+      "description": "Pipelines de operaciones, gestión de contactos, paneles KPI, informes — dirija su agencia como una máquina."
+    },
+    "scale": {
+      "title": "Escalar e invertir",
+      "description": "Carteras multi-propiedad, gestión de fondos, portales de inversores — de comprador individual a escala institucional."
+    },
+    "foundation": {
+      "title": "Base White-Label",
+      "description": "Su marca, sus colores, su dominio. Multiidioma, bóvedas de documentos, notificaciones — todo integrado."
+    }
+  },
+  "stats": {
+    "properties": "Propiedades gestionadas",
+    "countries": "Países conectados",
+    "clients": "Clientes satisfechos",
+    "modules": "Módulos de plataforma"
+  },
+  "regions": {
+    "title": "A lo largo del Mediterráneo",
+    "subtitle": "De la Costa Blanca al Algarve — donde los europeos del norte compran, Azely está presente.",
+    "costaBlanca": "Costa Blanca",
+    "costaSol": "Costa del Sol",
+    "balearics": "Islas Baleares",
+    "algarve": "Algarve",
+    "coteDazur": "Côte d'Azur"
+  },
+  "cta": {
+    "title": "¿Listo para transformar su agencia?",
+    "subtitle": "Únase a la plataforma que está redefiniendo el inmobiliario transfronterizo. Empiece con lo que necesita, escale a medida que crece.",
+    "button": "Solicitar demo",
+    "note": "Sin compromiso. Vea Azely en acción."
+  },
+  "footer": {
+    "description": "Plataforma inmobiliaria de última generación para agencias europeas transfronterizas.",
+    "platform": "Plataforma",
+    "company": "Empresa",
+    "legal": "Legal",
+    "privacy": "Política de privacidad",
+    "terms": "Términos de servicio",
+    "cookies": "Política de cookies",
+    "about": "Sobre nosotros",
+    "careers": "Empleo",
+    "blog": "Blog",
+    "copyright": "© 2026 Azely. Todos los derechos reservados."
+  },
+  "dashboard": {
+    "greeting": "Bienvenido de nuevo",
+    "overview": "Su resumen",
+    "dealProgress": "Progreso de la operación",
+    "upcomingTasks": "Próximas tareas",
+    "recentDocuments": "Documentos recientes",
+    "propertyDetails": "Detalles de la propiedad",
+    "quickActions": "Acciones rápidas",
+    "messages": "Mensajes",
+    "notifications": "Notificaciones"
+  },
+  "portal": {
+    "dashboard": "Panel",
+    "deal": "Seguimiento",
+    "documents": "Documentos",
+    "onboarding": "Onboarding",
+    "messages": "Mensajes",
+    "renovation": "Reformas",
+    "rental": "Alquiler",
+    "rentalManagement": "Gestión de alquiler",
+    "pricing": "Precios dinámicos",
+    "contractors": "Contratistas",
+    "compliance": "Cumplimiento",
+    "tax": "Panel fiscal",
+    "costOfOwnership": "Calculadora de costes",
+    "calendar": "Calendario",
+    "mortgage": "Hipoteca",
+    "utilities": "Suministros",
+    "comunidad": "Comunidad",
+    "content": "Intel de mercado",
+    "portfolio": "Cartera"
+  }
+}

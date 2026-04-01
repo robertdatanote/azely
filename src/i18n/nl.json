@@ -1,0 +1,131 @@
+{
+  "common": {
+    "azely": "Azely",
+    "tagline": "Project Clarity, By Design",
+    "login": "Inloggen",
+    "register": "Aan de slag",
+    "contact": "Contact",
+    "learnMore": "Meer info",
+    "viewAll": "Bekijk alles",
+    "save": "Opslaan",
+    "cancel": "Annuleren",
+    "delete": "Verwijderen",
+    "edit": "Bewerken",
+    "back": "Terug",
+    "next": "Volgende",
+    "search": "Zoeken",
+    "filter": "Filter",
+    "loading": "Laden...",
+    "noResults": "Geen resultaten gevonden",
+    "language": "Taal"
+  },
+  "nav": {
+    "home": "Home",
+    "properties": "Vastgoed",
+    "about": "Over ons",
+    "services": "Diensten",
+    "portal": "Klantenportaal",
+    "team": "Voor makelaars",
+    "marketplace": "Marktplaats"
+  },
+  "hero": {
+    "title": "Uw Spaanse vastgoedreis, vereenvoudigd",
+    "subtitle": "Van eerste bezichtiging tot gouden sleutels — Azely begeleidt grensoverschrijdende kopers bij elke stap van het kopen van vastgoed in Spanje.",
+    "cta": "Ontdek vastgoed",
+    "ctaSecondary": "Hoe het werkt"
+  },
+  "features": {
+    "title": "Alles wat u nodig heeft, niets wat u niet nodig heeft",
+    "subtitle": "39 modules verdeeld over 6 lagen — kies precies wat uw makelaarskantoor nodig heeft.",
+    "journey": {
+      "title": "Klantreis",
+      "description": "Onboarding, deal tracking, NIE-aanvragen, hypotheekvergelijking, e-handtekeningen — de complete kopervaring."
+    },
+    "operations": {
+      "title": "Vastgoedbeheer",
+      "description": "Renovatiemanagement, verhuurdashboards, dynamische prijzen, aannemersmarktplaats — maximaliseer vastgoedwaarde."
+    },
+    "compliance": {
+      "title": "Intelligentie & Compliance",
+      "description": "Grensoverschrijdende belastingdashboards, regelgeving, kostencalculators — navigeer bureaucratie met vertrouwen."
+    },
+    "team": {
+      "title": "Team & CRM",
+      "description": "Dealpipelines, contactbeheer, KPI-dashboards, rapportage — run uw kantoor als een machine."
+    },
+    "scale": {
+      "title": "Schalen & Investeren",
+      "description": "Multi-vastgoedportfolio's, fondsbeheer, investeerdersportalen — van individuele koper tot institutionele schaal."
+    },
+    "foundation": {
+      "title": "White-Label Fundament",
+      "description": "Uw merk, uw kleuren, uw domein. Meertalig, documentkluizen, notificaties — alles ingebouwd."
+    }
+  },
+  "stats": {
+    "properties": "Beheerd vastgoed",
+    "countries": "Verbonden landen",
+    "clients": "Tevreden klanten",
+    "modules": "Platform modules"
+  },
+  "regions": {
+    "title": "Door het hele Middellandse Zeegebied",
+    "subtitle": "Van de Costa Blanca tot de Algarve — overal waar Noord-Europeanen kopen, is Azely aanwezig.",
+    "costaBlanca": "Costa Blanca",
+    "costaSol": "Costa del Sol",
+    "balearics": "Balearen",
+    "algarve": "Algarve",
+    "coteDazur": "Côte d'Azur"
+  },
+  "cta": {
+    "title": "Klaar om uw makelaarskantoor te transformeren?",
+    "subtitle": "Sluit u aan bij het platform dat grensoverschrijdend vastgoed herdefinieert. Begin met wat u nodig heeft, schaal naarmate u groeit.",
+    "button": "Demo aanvragen",
+    "note": "Geen verplichtingen. Bekijk Azely in actie."
+  },
+  "footer": {
+    "description": "State-of-the-art vastgoedplatform voor grensoverschrijdende Europese makelaars.",
+    "platform": "Platform",
+    "company": "Bedrijf",
+    "legal": "Juridisch",
+    "privacy": "Privacybeleid",
+    "terms": "Algemene voorwaarden",
+    "cookies": "Cookiebeleid",
+    "about": "Over ons",
+    "careers": "Vacatures",
+    "blog": "Blog",
+    "copyright": "© 2026 Azely. Alle rechten voorbehouden."
+  },
+  "dashboard": {
+    "greeting": "Welkom terug",
+    "overview": "Uw overzicht",
+    "dealProgress": "Deal voortgang",
+    "upcomingTasks": "Komende taken",
+    "recentDocuments": "Recente documenten",
+    "propertyDetails": "Vastgoeddetails",
+    "quickActions": "Snelle acties",
+    "messages": "Berichten",
+    "notifications": "Meldingen"
+  },
+  "portal": {
+    "dashboard": "Dashboard",
+    "deal": "Deal tracker",
+    "documents": "Documenten",
+    "onboarding": "Onboarding",
+    "messages": "Berichten",
+    "renovation": "Renovatie",
+    "rental": "Verhuur",
+    "rentalManagement": "Verhuurbeheer",
+    "pricing": "Dynamische prijzen",
+    "contractors": "Aannemers",
+    "compliance": "Compliance",
+    "tax": "Belastingdashboard",
+    "costOfOwnership": "Kostencalculator",
+    "calendar": "Kalender",
+    "mortgage": "Hypotheek",
+    "utilities": "Nutsvoorzieningen",
+    "comunidad": "VvE",
+    "content": "Markt Intel",
+    "portfolio": "Portfolio"
+  }
+}

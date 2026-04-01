@@ -208,9 +208,14 @@ export function PropertiesPage() {
       <style>{`
         @media (max-width: 1024px) {
           .property-grid { grid-template-columns: repeat(2, 1fr) !important; }
+          .featured-card { grid-template-columns: 1fr !important; }
         }
         @media (max-width: 640px) {
           .property-grid { grid-template-columns: 1fr !important; }
+        }
+        a:hover .card-img,
+        a:hover .featured-img {
+          transform: scale(1.05);
         }
       `}</style>
     </LocaleProvider>
@@ -238,18 +243,23 @@ function FeaturedCard({ property }: { property: Property }) {
       <div
         style={{
           minHeight: 380,
-          background: "linear-gradient(135deg, var(--espresso-mid) 0%, var(--espresso-light) 50%, rgba(181,101,74,0.1) 100%)",
           position: "relative",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
+          overflow: "hidden",
         }}
       >
-        <svg width="100" height="100" viewBox="0 0 100 100" fill="none" opacity={0.12}>
-          <rect x="10" y="35" width="80" height="55" rx="4" stroke="var(--cream)" strokeWidth="1" />
-          <path d="M5 40L50 10L95 40" stroke="var(--cream)" strokeWidth="1" strokeLinecap="round" />
-          <rect x="35" y="55" width="30" height="35" rx="2" stroke="var(--cream)" strokeWidth="1" />
-        </svg>
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            backgroundImage: property.images[0] ? `url(${property.images[0]})` : undefined,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            background: property.images[0] ? undefined : "linear-gradient(135deg, var(--espresso-mid) 0%, var(--espresso-light) 100%)",
+            transition: "transform 0.6s cubic-bezier(0.16,1,0.3,1)",
+          }}
+          className="featured-img"
+        />
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(90deg, transparent 60%, var(--espresso) 100%)" }} />
         <StatusBadge status={property.status} style={{ position: "absolute", top: 20, left: 20 }} />
       </div>
 
@@ -364,18 +374,24 @@ function PropertyCard({ property }: { property: Property }) {
       {/* Image */}
       <div
         style={{
-          height: 240,
-          background: `linear-gradient(135deg, #1a1510 0%, #2a2018 40%, rgba(181,101,74,0.08) 100%)`,
+          height: 260,
           position: "relative",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
+          overflow: "hidden",
         }}
       >
-        <svg width="60" height="60" viewBox="0 0 60 60" fill="none" opacity={0.1}>
-          <rect x="8" y="25" width="44" height="30" rx="3" stroke="var(--cream)" strokeWidth="1" />
-          <path d="M4 28L30 8L56 28" stroke="var(--cream)" strokeWidth="1" strokeLinecap="round" />
-        </svg>
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            backgroundImage: property.images[0] ? `url(${property.images[0]})` : undefined,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            background: property.images[0] ? undefined : "linear-gradient(135deg, #1a1510 0%, #2a2018 100%)",
+            transition: "transform 0.5s cubic-bezier(0.16,1,0.3,1)",
+          }}
+          className="card-img"
+        />
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(0deg, rgba(0,0,0,0.3) 0%, transparent 50%)" }} />
         <StatusBadge status={property.status} style={{ position: "absolute", top: 16, right: 16 }} />
         <span
           style={{
@@ -386,7 +402,7 @@ function PropertyCard({ property }: { property: Property }) {
             fontWeight: 300,
             letterSpacing: "0.2em",
             textTransform: "uppercase",
-            color: "rgba(255,255,255,0.35)",
+            color: "rgba(255,255,255,0.7)",
           }}
         >
           {property.type}

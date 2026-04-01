@@ -25,21 +25,24 @@ export function PropertyDetailPage({ propertyId }: { propertyId: string }) {
           }}
           className="detail-hero"
         >
-          {/* Image placeholder */}
+          {/* Image */}
           <div
             style={{
-              background: "linear-gradient(135deg, #1a1510 0%, #2a2018 40%, rgba(181,101,74,0.08) 100%)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
               position: "relative",
+              overflow: "hidden",
             }}
           >
-            <svg width="120" height="120" viewBox="0 0 120 120" fill="none" opacity={0.08}>
-              <rect x="15" y="45" width="90" height="65" rx="4" stroke="var(--cream)" strokeWidth="1" />
-              <path d="M8 50L60 15L112 50" stroke="var(--cream)" strokeWidth="1" strokeLinecap="round" />
-              <rect x="42" y="65" width="36" height="45" rx="2" stroke="var(--cream)" strokeWidth="1" />
-            </svg>
+            <div
+              style={{
+                position: "absolute",
+                inset: 0,
+                backgroundImage: property.images[0] ? `url(${property.images[0]})` : undefined,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                background: property.images[0] ? undefined : "linear-gradient(135deg, #1a1510 0%, #2a2018 100%)",
+              }}
+            />
+            <div style={{ position: "absolute", inset: 0, background: "linear-gradient(90deg, transparent 50%, rgba(28,22,16,0.6) 100%)" }} />
 
             {/* Back link */}
             <Link
